@@ -1,6 +1,5 @@
 import React from 'react';
-import { BsThreeDotsVertical, BsCameraVideo, BsMic, BsEmojiSmile, BsCheckAll, BsWhatsapp } from 'react-icons/bs';
-import { IoMdSearch } from 'react-icons/io';
+import { BsThreeDotsVertical, BsCheckAll } from 'react-icons/bs';
 import { AiOutlinePlus } from 'react-icons/ai';
 
 export const Icons = {
