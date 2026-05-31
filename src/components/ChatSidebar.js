@@ -1,9 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Icons } from '../Icons';
 import NewChatSidebar from './NewChatSidebar';
 
 export default function ChatSidebar({ contacts, activeChat, onSelectChat }) {
   const [showNewChat, setShowNewChat] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const menuRef = useRef(null);
+  
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setShowMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -41,7 +54,40 @@ export default function ChatSidebar({ contacts, activeChat, onSelectChat }) {
             <h2>WhatsApp</h2>
             <div className="header-actions">
               <div className="icon" onClick={() => setShowNewChat(true)}><Icons.NewChat /></div>
-              <div className="icon"><Icons.Menu /></div>
+              <div className="icon-wrapper" style={{ position: 'relative' }} ref={menuRef}>
+                <div className={`icon ${showMenu ? 'active' : ''}`} onClick={() => setShowMenu(!showMenu)}>
+                  <Icons.Menu />
+                </div>
+                {showMenu && (
+                  <div className="dropdown-menu">
+                    <div className="dropdown-item">
+                      <span className="dropdown-icon"><Icons.NewGroup /></span>
+                      New group
+                    </div>
+                    <div className="dropdown-item">
+                      <span className="dropdown-icon"><Icons.StarredMessages /></span>
+                      Starred messages
+                    </div>
+                    <div className="dropdown-item">
+                      <span className="dropdown-icon"><Icons.SelectChats /></span>
+                      Select chats
+                    </div>
+                    <div className="dropdown-item">
+                      <span className="dropdown-icon"><Icons.MarkAllAsRead /></span>
+                      Mark all as read
+                    </div>
+                    <div className="dropdown-divider"></div>
+                    <div className="dropdown-item">
+                      <span className="dropdown-icon"><Icons.AppLock /></span>
+                      App lock
+                    </div>
+                    <div className="dropdown-item">
+                      <span className="dropdown-icon"><Icons.LogOut /></span>
+                      Log out
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
