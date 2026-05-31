@@ -21,8 +21,8 @@ export default function ChatSidebar({ contacts, activeChat, onSelectChat }) {
   const [activeFilter, setActiveFilter] = useState('All');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [recentSearches, setRecentSearches] = useState([
-    { id: 'r1', name: 'Busan Official', img: 'https://ui-avatars.com/api/?name=Busan+Official&background=random' },
-    { id: 'r2', name: 'Tronics Mlbb(C)', img: 'https://ui-avatars.com/api/?name=Tronics+Mlbb(C)&background=random' }
+    { id: 'r1', name: 'Person 1', img: 'https://ui-avatars.com/api/?name=Person+1&background=random' },
+    { id: 'r2', name: 'Person 2', img: 'https://ui-avatars.com/api/?name=Person+2&background=random' }
   ]);
 
   const filteredContacts = contacts.filter(contact => {
